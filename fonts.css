@@ -1,0 +1,4 @@
+/* Pawplay — საკუთარი სერვერიდან ჩატვირთვადი ფონტები (stage 22).
+   ფაილები უნდა იდოს fonts/ საქაღალდეში (იხ. RELEASE.md). */
+@font-face{font-family:'Manrope';font-style:normal;font-weight:200 800;font-display:swap;src:url('fonts/Manrope-Variable.woff2') format('woff2')}
+@font-face{font-family:'Noto Sans Georgian';font-style:normal;font-weight:100 900;font-display:swap;src:url('fonts/NotoSansGeorgian-Variable.woff2') format('woff2')}

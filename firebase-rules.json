@@ -1,0 +1,65 @@
+{
+ "rules": {
+  ".read": false,
+  ".write": false,
+  "rooms": {
+   "$room": {
+    ".read": true,
+    ".write": "$room.matches(/^[A-Z2-9]{5}$/) && (newData.exists() ? (!data.exists() || data.child('t').val() > now - 86400000) : (data.exists() && data.child('t').val() < now - 86400000))",
+    ".validate": "newData.hasChildren(['k','p','qs','i','s','ph','t']) && newData.child('k').val() === $room",
+    "k": {
+     ".validate": "newData.isString()"
+    },
+    "p": {
+     "0": {
+      ".validate": "newData.isString() && newData.val().length <= 30"
+     },
+     "1": {
+      ".validate": "newData.isString() && newData.val().length <= 30"
+     },
+     "$o": {
+      ".validate": false
+     }
+    },
+    "qs": {
+     "$q": {
+      ".validate": "newData.isString() && newData.val().length <= 300"
+     }
+    },
+    "acc": {
+     "$q": {
+      "$a": {
+       ".validate": "newData.isString() && newData.val().length <= 100"
+      }
+     }
+    },
+    "i": {
+     ".validate": "newData.isNumber()"
+    },
+    "s": {
+     "$x": {
+      ".validate": "newData.isNumber()"
+     }
+    },
+    "ph": {
+     ".validate": "newData.val() === 'answer' || newData.val() === 'guess' || newData.val() === 'reveal'"
+    },
+    "a": {
+     ".validate": "newData.isString() && newData.val().length <= 200"
+    },
+    "g": {
+     ".validate": "newData.isString() && newData.val().length <= 200"
+    },
+    "duel": {
+     ".validate": "newData.isBoolean()"
+    },
+    "t": {
+     ".validate": "newData.isNumber()"
+    },
+    "$other": {
+     ".validate": false
+    }
+   }
+  }
+ }
+}

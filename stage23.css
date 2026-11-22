@@ -1,0 +1,6 @@
+/* Pawplay stage 23: own question count / own timer inputs */
+.modal label.own{margin:-6px 0 6px;font-weight:600;color:#aab4d4}
+.modal label.own input{padding:10px 14px}
+.own-hint{display:block;min-height:0;margin:-2px 0 10px;color:#ffd27a;font-size:11px;line-height:1.5}
+.own-hint:empty{display:none}
+.modal input[type=number]{-moz-appearance:textfield;appearance:textfield}

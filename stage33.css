@@ -1,0 +1,3 @@
+/* Pawplay stage 33: picture avatars */
+.avatars span{overflow:hidden}
+.avatars span img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}

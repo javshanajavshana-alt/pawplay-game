@@ -1,0 +1,29 @@
+/* Pawplay stage 30: group game */
+.grp-entry{margin:0 0 6px;gap:8px;flex-wrap:wrap}
+.grp-entry small{font-weight:600;opacity:.7}
+.grp-h{font-size:12px;font-weight:800;color:#dce1f6;margin:20px 0 9px}
+.grp-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.grp-cat{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:11px 12px;border-radius:13px;border:1px solid var(--line);background:#ffffff08;color:#fff;font:600 12px Manrope,'Noto Sans Georgian',sans-serif;cursor:pointer}
+.grp-cat .gi{font-size:20px}.grp-cat small{color:var(--muted);font-size:11px;font-weight:500}
+.grp-cat.sel{border-color:#9e8cff;background:#9e8cff22}
+.grp-cat:disabled{opacity:.4;cursor:not-allowed}
+.grp-counts,.grp-ans{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:#ffffff08;color:#fff;border-radius:11px;padding:10px 15px;font:700 13px Manrope,'Noto Sans Georgian',sans-serif;cursor:pointer;min-height:40px}
+.chip.sel{border-color:#9e8cff;background:linear-gradient(110deg,#a18eff,#6a9cff);color:#10152d}
+.chip.locked{opacity:.75;border-style:dashed;color:#ffd27a}
+.grp-paid{margin:10px 0 0;padding:12px 14px;border:1px solid #ffd27a66;background:#ffd27a14;border-radius:12px;font-size:12px;line-height:1.6;color:#ffe3a8}
+.grp-paid[hidden]{display:none}
+.grp-score{display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:flex-end}
+.grp-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0;padding:11px 13px;border:1px solid var(--line);border-radius:13px;background:#ffffff08}
+.grp-row small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
+.grp-row b{overflow-wrap:anywhere}
+.grp-judge{display:flex;gap:6px;flex:none}.grp-judge .btn{padding:9px 14px;min-width:44px}
+.grp-ansbox{margin:6px 0 12px;padding:12px 14px;border:1px solid #8ce5c155;background:#8ce5c112;border-radius:13px}
+.grp-ansbox small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
+.grp-ansbox b{overflow-wrap:anywhere}
+.grp-board{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:14px 0}
+.grp-board div{min-width:84px;text-align:center;padding:14px 12px;border-radius:16px;border:1px solid var(--line);background:#ffffff08}
+.grp-board div.win{border-color:#8ce5c1;background:#8ce5c11a}
+.grp-board b{display:block;font-size:34px;line-height:1.1}
+.grp-board small{display:block;color:var(--muted);font-size:11px;margin-top:4px;overflow-wrap:anywhere}
+@media(max-width:420px){.grp-cats{grid-template-columns:1fr 1fr}.grp-row{flex-direction:column;align-items:stretch}.grp-judge{justify-content:flex-end}}

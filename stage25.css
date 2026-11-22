@@ -1,0 +1,7 @@
+/* Pawplay stage 25: question order */
+.order-prev{margin:2px 0 12px;font-size:11px;color:#aab4d4;line-height:1.6}
+.oc-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.oc{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 5px;border-radius:8px;font-size:11px;font-weight:800}
+.oc.o0{background:#9b8cff2e;color:#cfc8ff;border:1px solid #9b8cff66}
+.oc.o1{background:#69c5ff22;color:#b9e5ff;border:1px solid #69c5ff66}
+.oc.more{color:#8490b4}
