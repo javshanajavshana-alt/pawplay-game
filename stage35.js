@@ -62,7 +62,7 @@ function signIn(){
 function removeAccount(){
   var u=user;if(!u)return;
   var done=function(){lsPut(UID,'');lsPut(TS,'0');lsPut(DIRTY,'0');say('ანგარიში წაიშალა.')};
-  db.ref('users/'+u.uid+'/data').remove().catch(function(){}).then(function(){
+  Promise.all([db.ref('users/'+u.uid+'/data').remove().catch(function(){}),db.ref('users/'+u.uid+'/profile').remove().catch(function(){})]).then(function(){
     return u.delete().then(done).catch(function(e){
       if(e&&e.code==='auth/requires-recent-login')return u.reauthenticateWithPopup(new firebase.auth.GoogleAuthProvider()).then(function(){return u.delete()}).then(done);
       throw e;
@@ -120,7 +120,7 @@ function boot(){
   need('initializeApp','firebase-app-compat.js').then(function(){return need('auth','firebase-auth-compat.js')}).then(function(){return need('database','firebase-database-compat.js')}).then(function(){
     if(!firebase.apps.length)firebase.initializeApp(FB);
     auth=firebase.auth();db=firebase.database();
-    auth.onAuthStateChanged(function(u){user=u||null;window.pawUser=u?{uid:u.uid,plan:'free'}:null;render();if(u)pull()});
+    auth.onAuthStateChanged(function(u){user=u||null;window.pawUser=u?{uid:u.uid,plan:'free'}:null;render();document.dispatchEvent(new CustomEvent('pawauth',{detail:u?{uid:u.uid,name:u.displayName||''}:null}));if(u)pull()});
   }).catch(function(){btn.hidden=true});
 }
 if(document.readyState==='complete')setTimeout(boot,0);else window.addEventListener('load',function(){setTimeout(boot,0)});

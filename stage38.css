@@ -1,0 +1,9 @@
+/* Pawplay stage 38: game name (profile) */
+.prof-modal{z-index:30}
+.am-nick{font-size:12px;font-weight:700;color:#dce1f6;overflow-wrap:anywhere}
+.am-nick[hidden]{display:none}
+.prof-prev{font-size:12px;color:var(--muted);margin:6px 0 4px}
+.prof-prev b{color:#fff;overflow-wrap:anywhere}
+.prof-hint{margin-top:10px}
+.prof-hint b{color:#dce1f6}
+.prof-link{background:none;border:0;padding:0;color:#b4a6ff;font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}

@@ -185,3 +185,11 @@ New files: stage35.js, stage35.css. Edited: index.html (css/script links, stats 
 - Favourites, custom questions and result history sync through users/{uid}/data. First sign-in on a device merges (nothing lost); later cloud wins when newer. Another account on the same device never gets this device's data mixed in.
 - users/{uid}/plan can only be written from the Firebase console / admin (clients can read it): window.pawUser.plan is "free" by default. NO payment exists; the 5-8 player locks are unchanged.
 - Online rooms are untouched (still open to anyone with the code). NOT tested against a real Firebase project / real Google login.
+
+
+--- Stage 38 (game name / profile; additions only) ---
+New files: stage38.js, stage38.css. Edited: stage35.js (fires 'pawauth' event; account deletion also removes users/{uid}/profile), app.js (joiner gets " (2)" if the host has the identical name), firebase-rules.json (users/{uid}/profile), index.html, sw.js v37, privacy.html.
+- Signed-in players choose a game name (max 18) + optional tag/initials (max 8), shown as "Name (tag)". Change any time: account menu -> "სახელის შეცვლა". First sign-in without a profile opens the picker automatically.
+- Online rooms (create/join) always use the profile name. One-device mode: the name only pre-fills the first field.
+- Uniqueness is NOT enforced (no backend); tags are for telling same-named players apart.
+- IMPORTANT: paste the new firebase-rules.json into Firebase console -> Realtime Database -> Rules and press Publish, otherwise saving a profile is rejected.

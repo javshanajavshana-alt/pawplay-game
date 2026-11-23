@@ -85,6 +85,19 @@
     },
     "plan": {
      ".validate": "newData.isString()"
+    },
+    "profile": {
+     ".write": "auth != null && auth.uid === $uid",
+     ".validate": "newData.hasChildren(['n'])",
+     "n": {
+      ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 18"
+     },
+     "g": {
+      ".validate": "newData.isString() && newData.val().length <= 8"
+     },
+     "$other": {
+      ".validate": false
+     }
     }
    }
   }

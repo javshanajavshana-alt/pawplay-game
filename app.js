@@ -71,11 +71,12 @@ const need=(t,f)=>(typeof firebase!=='undefined'&&typeof firebase[t]==='function
 need('initializeApp','firebase-app-compat.js').then(()=>need('database','firebase-database-compat.js')).then(()=>{if(!firebase.apps.length)firebase.initializeApp(FB);db=firebase.database();cb()}).catch(()=>toast('ონლაინ სერვისი ვერ ჩაიტვირთა.'))}
 const roomCode=()=>{const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';return Array.from({length:5},()=>c[Math.floor(Math.random()*c.length)]).join('')};
 function startOnline(create){const name=$('#playerOne').value.trim()||'მოთამაშე';
+clearTimeout(window.__pawW);window.__pawW=setTimeout(()=>toast('ბაზასთან კავშირი ვერ დამყარდა. შეამოწმე ინტერნეტი და config.js.'),8000);
 loadFB(()=>{if(create){const c=+$('#gameCategory').value,n=+$('#questionCount').value,k=roomCode(),qs=shuffle(pool(c)).slice(0,n);me=0;roomRef=db.ref('rooms/'+k);
 roomRef.set({k,p:[name,''],qs:qs.map(q=>q.t),acc:qs.map(q=>q.acc.length?q.acc:['']),i:0,s:[0,0],duel:c===6,ph:'answer',a:'',g:'',t:Date.now()}).then(listen).catch(()=>toast('ოთახის შექმნა ვერ მოხერხდა.'))}
 else{const k=$('#joinCode').value.trim().toUpperCase();if(!k)return toast('ჩაწერე ოთახის კოდი.');me=1;roomRef=db.ref('rooms/'+k);
-roomRef.once('value').then(s=>{const v=s.val();if(!v)return toast('ოთახი ვერ მოიძებნა.');if(v.p[1])return toast('ოთახი უკვე სავსეა.');roomRef.child('p/1').set(name).then(listen)}).catch(()=>toast('შესვლა ვერ მოხერხდა.'))}})}
-function listen(){closeModal('gameModal');openModal('demoModal');roomRef.on('value',s=>{const v=s.val();if(v){O=v;drawOnline()}})}
+roomRef.once('value').then(s=>{const v=s.val();if(!v)return toast('ოთახი ვერ მოიძებნა.');if(v.p[1])return toast('ოთახი უკვე სავსეა.');roomRef.child('p/1').set(name===v.p[0]?name.slice(0,26)+' (2)':name).then(listen)}).catch(()=>toast('შესვლა ვერ მოხერხდა.'))}})}
+function listen(){clearTimeout(window.__pawW);closeModal('gameModal');openModal('demoModal');roomRef.on('value',s=>{const v=s.val();if(v){O=v;drawOnline()}})}
 function drawOnline(){const v=O,b=$('#gBody'),n=v.qs.length;$('#demoTitle').textContent=v.p[0]+' × '+(v.p[1]||'…');
 if(!v.p[1]){b.innerHTML=`<div class="pass">⏳</div><h3>ელოდები მეგობარს</h3><p class="modal-sub">გაუგზავნე ოთახის კოდი:</p><div class="room-code">${esc(v.k)}</div>`;return}
 const s=v.s||[0,0];if(v.i>=n){G={p:v.p,s,duel:v.duel};return result(b)}
