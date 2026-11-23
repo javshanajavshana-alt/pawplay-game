@@ -1,0 +1,26 @@
+/* PawPlay stage36: phone-friendly + lighter on phones */
+html{-webkit-text-size-adjust:100%}
+button,.btn,a,summary,.category-card{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.btn:disabled{opacity:.6;cursor:wait;transform:none;box-shadow:none}
+
+@media (max-width:760px){
+  /* big blurred glows and the dotted layer are heavy for phones */
+  .ambient,body:before{display:none}
+
+  .modal-backdrop{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    background:rgba(7,11,25,.92);
+  }
+  .modal{
+    max-height:calc(100vh - 24px);
+    max-height:calc(100dvh - 24px);
+    -webkit-overflow-scrolling:touch;
+  }
+  /* 16px stops iPhone from zooming in when typing */
+  .modal input,.modal select,.modal textarea{font-size:16px}
+  .modal .btn{min-height:46px}
+  .demo-actions{flex-wrap:wrap}
+  .demo-actions .btn{flex:1 1 140px}
+  .room-code{font-size:clamp(28px,11vw,40px);letter-spacing:6px}
+}
