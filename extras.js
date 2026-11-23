@@ -73,7 +73,7 @@ function trackOnline(v){
     H.push(pend);pend=null;
   }
   if(v.i<v.qs.length&&v.ph==='reveal'&&(!pend||pend.i!==v.i)){
-    pend={i:v.i,q:v.qs[v.i],a:v.a,g:v.g,A:v.i%2,p:v.p.slice(),duel:v.duel,s:s.slice()};
+    pend={i:v.i,q:v.qs[v.i],a:v.a,g:v.g,A:(window.pawAOn?pawAOn(v):v.i%2),p:v.p.slice(),duel:v.duel,s:s.slice()};
   }
 }
 

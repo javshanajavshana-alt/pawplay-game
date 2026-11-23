@@ -1,0 +1,10 @@
+/* Pawplay stage 39: online room settings */
+#roomModal{z-index:30}
+#roomModal .modal{max-height:92vh;overflow-y:auto}
+.rm-cats-t{font-weight:700;font-size:14px;margin:14px 0 4px}
+.rm-cats-t small{color:var(--muted);font-weight:500}
+#rmCats{display:grid;gap:0}
+.rm-cat{margin:6px 0!important}
+.rm-cat small{color:var(--muted);font-weight:500}
+.rm-back{margin-top:8px}
+#rmOrderLbl[hidden]{display:none}

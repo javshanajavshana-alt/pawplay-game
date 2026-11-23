@@ -56,6 +56,15 @@
     "t": {
      ".validate": "newData.isNumber()"
     },
+    "tm": {
+     ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 300"
+    },
+    "cs": {
+     ".validate": "newData.isString() && newData.val().matches(/^[0-9,]{1,40}$/)"
+    },
+    "ord": {
+     ".validate": "newData.isString() && newData.val().length <= 500 && newData.val().matches(/^[01]+$/)"
+    },
     "$other": {
      ".validate": false
     }

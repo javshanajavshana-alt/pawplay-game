@@ -193,3 +193,10 @@ New files: stage38.js, stage38.css. Edited: stage35.js (fires 'pawauth' event; a
 - Online rooms (create/join) always use the profile name. One-device mode: the name only pre-fills the first field.
 - Uniqueness is NOT enforced (no backend); tags are for telling same-named players apart.
 - IMPORTANT: paste the new firebase-rules.json into Firebase console -> Realtime Database -> Rules and press Publish, otherwise saving a profile is rejected.
+
+--- Stage 39 (online room settings; additions only) ---
+New files: stage39.js, stage39.css. Edited: app.js (startOnline uses the chosen settings; drawOnline asks pawAOn who answers), stage14.js (timer comes from the room), stage18.js (swap/rematch follow the room's categories and order), extras.js (recap), firebase-rules.json (room fields tm, cs, ord), index.html, sw.js v38.
+- "ოთახის შექმნა" now opens a settings window BEFORE the code appears: several categories at once (duel and favourites are separate modes), number of questions (own number allowed), who answers (alternate / random / only me / only the friend) and the timer (own seconds allowed).
+- The host's choices are saved in the room (tm = timer seconds, cs = category list, ord = who answers each question), so both players get the same timer and order.
+- IMPORTANT: paste the new firebase-rules.json into Firebase console -> Realtime Database -> Rules and press Publish, otherwise creating a room is rejected.
+- Not tested in a real browser or against a live Firebase project - please test with two devices.

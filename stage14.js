@@ -86,6 +86,7 @@ function expire(){
 function timerHook(){
   stopTimer();
   var ts=$('#timerSel'),secs=ts?+ts.value:0,inp=$('#gIn');
+  if(online&&typeof O!=='undefined'&&O&&typeof O.tm==='number')secs=O.tm; /* stage 39: the host's timer choice is stored in the room */
   if(!secs||!inp||!demo.classList.contains('show')){tmKey=null;return}
   /* stage 26: the timer is only for the player who guesses; the player who answers about himself has no time limit */
   var ph=(online&&typeof O!=='undefined'&&O)?O.ph:(typeof G!=='undefined'&&G?G.ph:'');

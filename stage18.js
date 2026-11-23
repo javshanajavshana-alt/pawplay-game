@@ -14,6 +14,7 @@ function live(){return online&&typeof O!=='undefined'&&O&&typeof roomRef!=='unde
 function mixIndex(){for(var i=0;i<categories.length;i++)if(categories[i].name==='შერეული')return i;return -1}
 function inferPool(v){
   if(v.duel)return pool(6);
+  if(v.cs){var sn={},out=[];String(v.cs).split(',').forEach(function(x){var c=+x;if(categories[c]&&c!==6)pool(c).forEach(function(q){if(!sn[q.t]){sn[q.t]=1;out.push(q)}})});if(out.length)return out}
   if(window.pawFavPool){var fp=window.pawFavPool(v.qs);if(fp)return fp}
   var hit={},n=0;
   categories.forEach(function(c,i){if(i===6)return;
@@ -31,18 +32,18 @@ function spares(v){
 }
 function leftSwaps(v){return Math.max(0,Math.min(MAX_SWAPS+(extra[v.k]||0)-(swaps[v.k]||0),spares(v).length))}
 /* stage 24: the "+" button adds one more allowed swap in this room, as long as unused questions remain */
-window.pawMoreSwapsOnline={can:function(){var v=O;return !!(live()&&v&&v.p&&v.p[1]&&v.ph==='answer'&&v.i<v.qs.length&&me===v.i%2&&$('#gIn')&&leftSwaps(v)<spares(v).length)},add:function(){if(O)extra[O.k]=(extra[O.k]||0)+1}};
+window.pawMoreSwapsOnline={can:function(){var v=O;return !!(live()&&v&&v.p&&v.p[1]&&v.ph==='answer'&&v.i<v.qs.length&&me===(window.pawAOn?pawAOn(v):v.i%2)&&$('#gIn')&&leftSwaps(v)<spares(v).length)},add:function(){if(O)extra[O.k]=(extra[O.k]||0)+1}};
 
 /* ---------- 18.1 swap the question (only the player who is answering, before answering) ---------- */
 function swap(){
-  var v=O;if(!live()||v.ph!=='answer'||me!==v.i%2||!leftSwaps(v))return;
+  var v=O;if(!live()||v.ph!=='answer'||me!==(window.pawAOn?pawAOn(v):v.i%2)||!leftSwaps(v))return;
   var sp=shuffle(spares(v)),nq=sp[0];if(!nq)return;
   var up={};up['qs/'+v.i]=nq.t;up['acc/'+v.i]=nq.acc.length?nq.acc:[''];
   swaps[v.k]=(swaps[v.k]||0)+1;
   roomRef.update(up).catch(function(){swaps[v.k]--;toast('შეცვლა ვერ მოხერხდა.')});
 }
 function postSwap(){
-  if(!live()||!O.p||!O.p[1]||O.ph!=='answer'||O.i>=O.qs.length||me!==O.i%2||!$('#gIn'))return;
+  if(!live()||!O.p||!O.p[1]||O.ph!=='answer'||O.i>=O.qs.length||me!==(window.pawAOn?pawAOn(O):O.i%2)||!$('#gIn'))return;
   var n=leftSwaps(O);if(!n)return;
   var acts=$('#gBody .demo-actions');if(!acts||$('#gSwap'))return;
   var b=document.createElement('button');

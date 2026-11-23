@@ -72,15 +72,15 @@ need('initializeApp','firebase-app-compat.js').then(()=>need('database','firebas
 const roomCode=()=>{const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';return Array.from({length:5},()=>c[Math.floor(Math.random()*c.length)]).join('')};
 function startOnline(create){const name=$('#playerOne').value.trim()||'მოთამაშე';
 clearTimeout(window.__pawW);window.__pawW=setTimeout(()=>toast('ბაზასთან კავშირი ვერ დამყარდა. შეამოწმე ინტერნეტი და config.js.'),8000);
-loadFB(()=>{if(create){const c=+$('#gameCategory').value,n=+$('#questionCount').value,k=roomCode(),qs=shuffle(pool(c)).slice(0,n);me=0;roomRef=db.ref('rooms/'+k);
-roomRef.set({k,p:[name,''],qs:qs.map(q=>q.t),acc:qs.map(q=>q.acc.length?q.acc:['']),i:0,s:[0,0],duel:c===6,ph:'answer',a:'',g:'',t:Date.now()}).then(listen).catch(()=>toast('ოთახის შექმნა ვერ მოხერხდა.'))}
+loadFB(()=>{if(create){const R=window.pawRoomOpts;window.pawRoomOpts=null;const c=R?(R.cats.length===1?R.cats[0]:-1):+$('#gameCategory').value,n=R?R.n:+$('#questionCount').value,k=roomCode(),qs=shuffle(R?(()=>{const sn=new Set();return R.cats.flatMap(x=>pool(x)).filter(q=>!sn.has(q.t)&&sn.add(q.t))})():pool(c)).slice(0,n);me=0;roomRef=db.ref('rooms/'+k);
+roomRef.set({k,p:[name,''],qs:qs.map(q=>q.t),acc:qs.map(q=>q.acc.length?q.acc:['']),i:0,s:[0,0],duel:c===6,ph:'answer',a:'',g:'',t:Date.now(),...(R?{tm:R.tm,cs:R.cats.join(','),...(R.mode!=='alt'&&c!==6?{ord:window.pawMkOrd(R.mode,qs.length)}:{})}:{})}).then(listen).catch(()=>toast('ოთახის შექმნა ვერ მოხერხდა.'))}
 else{const k=$('#joinCode').value.trim().toUpperCase();if(!k)return toast('ჩაწერე ოთახის კოდი.');me=1;roomRef=db.ref('rooms/'+k);
 roomRef.once('value').then(s=>{const v=s.val();if(!v)return toast('ოთახი ვერ მოიძებნა.');if(v.p[1])return toast('ოთახი უკვე სავსეა.');roomRef.child('p/1').set(name===v.p[0]?name.slice(0,26)+' (2)':name).then(listen)}).catch(()=>toast('შესვლა ვერ მოხერხდა.'))}})}
 function listen(){clearTimeout(window.__pawW);closeModal('gameModal');openModal('demoModal');roomRef.on('value',s=>{const v=s.val();if(v){O=v;drawOnline()}})}
 function drawOnline(){const v=O,b=$('#gBody'),n=v.qs.length;$('#demoTitle').textContent=v.p[0]+' × '+(v.p[1]||'…');
 if(!v.p[1]){b.innerHTML=`<div class="pass">⏳</div><h3>ელოდები მეგობარს</h3><p class="modal-sub">გაუგზავნე ოთახის კოდი:</p><div class="room-code">${esc(v.k)}</div>`;return}
 const s=v.s||[0,0];if(v.i>=n){G={p:v.p,s,duel:v.duel};return result(b)}
-const A=v.i%2,B=1-A,q=v.qs[v.i],acc=((v.acc&&v.acc[v.i])||[]).filter(Boolean),pa=esc(v.p[A]),pb=esc(v.p[B]),upd=o=>roomRef.update(o);
+const A=window.pawAOn?pawAOn(v):v.i%2,B=1-A,q=v.qs[v.i],acc=((v.acc&&v.acc[v.i])||[]).filter(Boolean),pa=esc(v.p[A]),pb=esc(v.p[B]),upd=o=>roomRef.update(o);
 $('#demoProgress').style.width=(v.i/n*100)+'%';
 const head=`<div class="demo-meta"><span>კითხვა ${v.i+1} / ${n}</span><span>${esc(v.p[0])} ${s[0]} : ${s[1]} ${esc(v.p[1])}</span></div>`;
 const wait=t=>b.innerHTML=head+`<h3>${esc(q)}</h3><div class="pass">⏳</div><p class="modal-sub">${t}</p>`;
