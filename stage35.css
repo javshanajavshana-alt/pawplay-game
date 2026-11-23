@@ -1,0 +1,11 @@
+/* Pawplay stage 35: Google sign-in button and account menu */
+.auth-btn{display:inline-flex;align-items:center;gap:8px;margin-left:12px;padding:9px 14px;border-radius:12px;border:1px solid var(--line);background:#ffffff0a;color:#fff;font:700 12px Manrope,'Noto Sans Georgian',sans-serif;cursor:pointer;min-height:38px;white-space:nowrap}
+.auth-btn[hidden],.auth-menu[hidden]{display:none}
+.auth-btn:hover{border-color:#9e8cff88}
+.auth-btn img{border-radius:50%;display:block}
+.auth-menu{position:absolute;top:74px;right:28px;z-index:35;width:min(280px,calc(100vw - 36px));display:flex;flex-direction:column;gap:8px;padding:16px;background:#182242;border:1px solid #ffffff20;border-radius:16px;box-shadow:0 20px 60px #0008}
+.am-mail{font-size:12px;color:var(--muted);overflow-wrap:anywhere;margin-bottom:2px}
+.auth-menu .btn{padding:11px 14px;font-size:12px}
+.am-del{color:#ff9aa8}
+.am-note{font-size:11px;color:#8490b4;line-height:1.5}
+@media(max-width:600px){.auth-btn{margin-left:auto;margin-right:8px;padding:8px 11px}.auth-menu{top:62px;right:18px}}

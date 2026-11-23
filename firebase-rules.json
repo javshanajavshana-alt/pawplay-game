@@ -60,6 +60,33 @@
      ".validate": false
     }
    }
+  },
+  "users": {
+   "$uid": {
+    ".read": "auth != null && auth.uid === $uid",
+    "data": {
+     ".write": "auth != null && auth.uid === $uid",
+     ".validate": "newData.hasChildren(['ts'])",
+     "ts": {
+      ".validate": "newData.isNumber()"
+     },
+     "custom": {
+      ".validate": "newData.isString() && newData.val().length <= 200000"
+     },
+     "favs": {
+      ".validate": "newData.isString() && newData.val().length <= 100000"
+     },
+     "hist": {
+      ".validate": "newData.isString() && newData.val().length <= 100000"
+     },
+     "$other": {
+      ".validate": false
+     }
+    },
+    "plan": {
+     ".validate": "newData.isString()"
+    }
+   }
   }
  }
 }

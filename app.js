@@ -67,7 +67,8 @@ e.querySelectorAll('button').forEach(b=>b.onclick=()=>{custom=custom.filter(q=>S
 const FB=window.PAWPLAY_FIREBASE;let db=null,roomRef=null,me=0,O=null;
 function loadFB(cb){const L=s=>new Promise((r,j)=>{const e=document.createElement('script');e.src=s;e.onload=r;e.onerror=j;document.head.appendChild(e)});
 if(db)return cb();
-L('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js').then(()=>L('https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js')).then(()=>{firebase.initializeApp(FB);db=firebase.database();cb()}).catch(()=>toast('ონლაინ სერვისი ვერ ჩაიტვირთა.'))}
+const need=(t,f)=>(typeof firebase!=='undefined'&&typeof firebase[t]==='function')?Promise.resolve():L('https://www.gstatic.com/firebasejs/10.12.2/'+f);
+need('initializeApp','firebase-app-compat.js').then(()=>need('database','firebase-database-compat.js')).then(()=>{if(!firebase.apps.length)firebase.initializeApp(FB);db=firebase.database();cb()}).catch(()=>toast('ონლაინ სერვისი ვერ ჩაიტვირთა.'))}
 const roomCode=()=>{const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';return Array.from({length:5},()=>c[Math.floor(Math.random()*c.length)]).join('')};
 function startOnline(create){const name=$('#playerOne').value.trim()||'მოთამაშე';
 loadFB(()=>{if(create){const c=+$('#gameCategory').value,n=+$('#questionCount').value,k=roomCode(),qs=shuffle(pool(c)).slice(0,n);me=0;roomRef=db.ref('rooms/'+k);

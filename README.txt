@@ -176,3 +176,12 @@ index.html: the 2nd and 3rd small avatars are now the faces of თორნი�
 
 --- Stage 34 (text only) ---
 index.html: hero eyebrow + lead, proof line, meta/og descriptions, stats strip (2–4), how-it-works texts, first FAQ answer and the second-name label now talk about 2 or more players and friends / couples / groups. sw.js v33.
+
+
+--- Stage 35 (Google sign-in + sync; additions only) ---
+New files: stage35.js, stage35.css. Edited: index.html (css/script links, stats "09", FAQ answer about stored data), app.js (loadFB no longer loads/initialises Firebase twice), sw.js v34, firebase-rules.json (users/{uid}), privacy.html, terms.html, manifest.json (texts).
+- Works only when config.js has a full Firebase config. In Firebase console: Authentication -> Sign-in method -> Google -> Enable; Authorized domains -> add your domain; paste the new firebase-rules.json.
+- "Google-ით შესვლა" button in the top bar; signed in: name + menu (sign out, delete account).
+- Favourites, custom questions and result history sync through users/{uid}/data. First sign-in on a device merges (nothing lost); later cloud wins when newer. Another account on the same device never gets this device's data mixed in.
+- users/{uid}/plan can only be written from the Firebase console / admin (clients can read it): window.pawUser.plan is "free" by default. NO payment exists; the 5-8 player locks are unchanged.
+- Online rooms are untouched (still open to anyone with the code). NOT tested against a real Firebase project / real Google login.

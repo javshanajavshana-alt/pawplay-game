@@ -1,7 +1,7 @@
 {
  "name": "Pawplay",
  "short_name": "Pawplay",
- "description": "ორი მოთამაშის თამაში: რამდენად კარგად იცნობ მეგობარს?",
+ "description": "თამაში მეგობრებისთვის და წყვილებისთვის: რამდენად კარგად იცნობთ ერთმანეთს?",
  "lang": "ka",
  "start_url": "./index.html",
  "scope": "./",
